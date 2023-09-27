@@ -87,6 +87,7 @@ function renderResults() {
     li.textContent = `${OddDuck.allOddDuckArray[i].name} had ${OddDuck.allOddDuckArray[i].views} views and was clicked on ${OddDuck.allOddDuckArray[i].click} times`;
     ul.appendChild(li);
   }
+  runOddDuckDChart();
 }
 
 new OddDuck('R2D2 bag', 'images/bag.jpg');
@@ -116,3 +117,30 @@ new OddDuck('Cat', 'images/kittycat.jpg');
 
 renderOddDuck();
 imageContainer.addEventListener('click', handleOddProductClick);
+
+
+function runOddDuckDChart(){
+  //update the labels
+  //update the datasets
+  // loop over our OddDuck Array
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
