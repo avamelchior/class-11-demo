@@ -3,6 +3,7 @@ console.log('app.js is running!');
 
 let imageContainer = document.querySelector('section');
 let resultButton = document.querySelector('section + div');
+console.log(imageContainer,renderResults);
 let image1 = document.getElementById('imageOne');
 let image2 = document.getElementById('imageTwo');
 let image3 = document.getElementById('imageThree');
@@ -97,7 +98,7 @@ new Animals('Pen Plate', 'images/pen.jpg');
 new Animals('PetSweep', 'images/pet-sweep.jpg');
 new Animals('Pizscissors-A', 'images/scissors.jpg');
 new Animals('SharkSleep', 'images/shark.jpg');
-new Animals('Baby Clean', 'images/sweep.jpg');
+new Animals('Baby Clean', 'images/sweep.png');
 new Animals('Hoth Cloth', 'images/tauntaun.jpg');
 new Animals('Uni-Spam', 'images/unicorn.jpg');
 // new Animals('Tail TeraByte', 'images/usb.jpg');
