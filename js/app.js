@@ -81,7 +81,7 @@ function handleOddProductClick(event) {
 function renderResults() {
   console.log('proof of life in the render results');
   let ul = document.querySelector('ul');
-
+  console.log(ul);
   for (let i = 0; i < OddDuck.allOddDuckArray.length; i++) {
     let li = document.createElement('li');
     li.textContent = `${OddDuck.allOddDuckArray[i].name} had ${OddDuck.allOddDuckArray[i].views} views and was clicked on ${OddDuck.allOddDuckArray[i].click} times`;
