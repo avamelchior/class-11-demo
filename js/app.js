@@ -13,75 +13,75 @@ let maxAttemptsAllowed = 10;
 Animals.allAnimalsArray = [];
 
 function Animals(name, src) {
-    this.name = name;
-    this.src = src;
-    this.views = 0;
-    this.click = 0;
+  this.name = name;
+  this.src = src;
+  this.views = 0;
+  this.click = 0;
 
-    Animals.allAnimalsArray.push(this);
+  Animals.allAnimalsArray.push(this);
 }
 
 function getRandomNumber() {
-    return Math.floor(Math.random() * Animals.allAnimalsArray.length);
+  return Math.floor(Math.random() * Animals.allAnimalsArray.length);
 }
 
 function renderAnimals() {
-    let animal1, animal2, animal3;
+  let animal1, animal2, animal3;
 
-    do {
-        animal1 = getRandomNumber();
-        animal2 = getRandomNumber();
-        animal3 = getRandomNumber();
-    } while (animal1 === animal2 || animal1 === animal3 || animal2 === animal3);
+  do {
+    animal1 = getRandomNumber();
+    animal2 = getRandomNumber();
+    animal3 = getRandomNumber();
+  } while (animal1 === animal2 || animal1 === animal3 || animal2 === animal3);
 
-    image1.src = Animals.allAnimalsArray[animal1].src;
-    image2.src = Animals.allAnimalsArray[animal2].src;
-    image3.src = Animals.allAnimalsArray[animal3].src;
+  image1.src = Animals.allAnimalsArray[animal1].src;
+  image2.src = Animals.allAnimalsArray[animal2].src;
+  image3.src = Animals.allAnimalsArray[animal3].src;
 
-    image1.alt = Animals.allAnimalsArray[animal1].name;
-    image2.alt = Animals.allAnimalsArray[animal2].name;
-    image3.alt = Animals.allAnimalsArray[animal3].name;
+  image1.alt = Animals.allAnimalsArray[animal1].name;
+  image2.alt = Animals.allAnimalsArray[animal2].name;
+  image3.alt = Animals.allAnimalsArray[animal3].name;
 
-    Animals.allAnimalsArray[animal1].views++;
-    Animals.allAnimalsArray[animal2].views++;
-    Animals.allAnimalsArray[animal3].views++;
+  Animals.allAnimalsArray[animal1].views++;
+  Animals.allAnimalsArray[animal2].views++;
+  Animals.allAnimalsArray[animal3].views++;
 }
 
 function handleAnimalClick(event) {
-    console.log('proof of life!', event);
-    if (event.target === imageContainer) {
-        alert('Please click on an image!');
-    }
+  console.log('proof of life!', event);
+  if (event.target === imageContainer) {
+    alert('Please click on an image!');
+  }
 
-    clicks++;
+  clicks++;
 
-    let clickAnimal = event.target.alt;
-    console.log('animal name', clickAnimal);
-    for (let i = 0; i < Animals.allAnimalsArray.length; i++) {
-        if (clickAnimal === Animals.allAnimalsArray[i].name) {
-            Animals.allAnimalsArray[i].click++;
-            break;
-        }
+  let clickAnimal = event.target.alt;
+  console.log('animal name', clickAnimal);
+  for (let i = 0; i < Animals.allAnimalsArray.length; i++) {
+    if (clickAnimal === Animals.allAnimalsArray[i].name) {
+      Animals.allAnimalsArray[i].click++;
+      break;
     }
+  }
 
-    if (clicks === maxAttemptsAllowed) {
-        imageContainer.removeEventListener('click', handleAnimalClick);
-        resultButton.addEventListener('click', renderResults);
-        imageContainer.className = 'no-voting';
-    } else {
-        renderAnimals();
-    }
+  if (clicks === maxAttemptsAllowed) {
+    imageContainer.removeEventListener('click', handleAnimalClick);
+    resultButton.addEventListener('click', renderResults);
+    imageContainer.className = 'no-voting';
+  } else {
+    renderAnimals();
+  }
 }
 
 function renderResults() {
-    console.log('proof of life in the render results');
-    let ul = document.querySelector('ul');
+  console.log('proof of life in the render results');
+  let ul = document.querySelector('ul');
 
-    for (let i = 0; i < Animals.allAnimalsArray.length; i++) {
-        let li = document.createElement('li');
-        li.textContent = `${Animals.allAnimalsArray[i].name} had ${Animals.allAnimalsArray[i].views} views and was clicked on ${Animals.allAnimalsArray[i].click} times`;
-        ul.appendChild(li);
-    }
+  for (let i = 0; i < Animals.allAnimalsArray.length; i++) {
+    let li = document.createElement('li');
+    li.textContent = `${Animals.allAnimalsArray[i].name} had ${Animals.allAnimalsArray[i].views} views and was clicked on ${Animals.allAnimalsArray[i].click} times`;
+    ul.appendChild(li);
+  }
 }
 
 new Animals('R2D2 bag', 'images/bag.jpg');
