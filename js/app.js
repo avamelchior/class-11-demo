@@ -61,7 +61,7 @@ function handleOddProductClick(event) {
   clicks++;
 
   let clickoddProduct = event.target.alt;
-  console.log('oddProduct name', clickoddProduct);
+  //   console.log('oddProduct name', clickoddProduct);
   for (let i = 0; i < OddDuck.allOddDuckArray.length; i++) {
     if (clickoddProduct === OddDuck.allOddDuckArray[i].name) {
       OddDuck.allOddDuckArray[i].click++;
@@ -70,7 +70,7 @@ function handleOddProductClick(event) {
   }
 
   if (clicks === maxAttemptsAllowed) {
-    imageContainer.removeEventListener('click', handleoddProductClick);
+    imageContainer.removeEventListener('click', handleOddProductClick);
     resultButton.addEventListener('click', renderResults);
     imageContainer.className = 'no-voting';
   } else {

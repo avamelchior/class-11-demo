@@ -1,3 +1,18 @@
+
+body{
+    width: 1600px;
+    margin: 0 auto;
+}
+
+
+
+section {
+    display: flex;
+    justify-content: space-between;
+    background-color: gainsboro;
+}
+
+
 img {
     width: 300px;
     height: 300px;
