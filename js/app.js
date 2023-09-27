@@ -7,7 +7,7 @@ let resultButton = document.getElementById('view-results');
 let image1 = document.getElementById('imageOne');
 let image2 = document.getElementById('imageTwo');
 let image3 = document.getElementById('imageThree');
-console.log(image1, image2, image3);
+// console.log(image1, image2, image3);
 
 let clicks = 0;
 let maxAttemptsAllowed = 10;
@@ -21,7 +21,7 @@ function OddDuck(name, src) {
 
   OddDuck.allOddDuckArray.push(this);
 }
-console.log(OddDuck.allOddDuckArray);
+// console.log(OddDuck.allOddDuckArray);
 
 function getRandomNumber() {
   return Math.floor(Math.random() * OddDuck.allOddDuckArray.length);
@@ -36,9 +36,9 @@ function renderOddDuck() {
     oddProduct2 = getRandomNumber();
     oddProduct3 = getRandomNumber();
   } while (oddProduct1 === oddProduct2 || oddProduct1 === oddProduct3 || oddProduct2 === oddProduct3);
-  console.log(oddProduct1, oddProduct2, oddProduct3);
+  //   console.log(oddProduct1, oddProduct2, oddProduct3);
   //             const. array[number - getRandomNumber();].property
-  console.log(OddDuck.allOddDuckArray[oddProduct1].src);
+  //   console.log(OddDuck.allOddDuckArray[oddProduct1].src);
   image1.src = OddDuck.allOddDuckArray[oddProduct1].src;
   image2.src = OddDuck.allOddDuckArray[oddProduct2].src;
   image3.src = OddDuck.allOddDuckArray[oddProduct3].src;
@@ -46,14 +46,14 @@ function renderOddDuck() {
   image1.alt = OddDuck.allOddDuckArray[oddProduct1].name;
   image2.alt = OddDuck.allOddDuckArray[oddProduct2].name;
   image3.alt = OddDuck.allOddDuckArray[oddProduct3].name;
-
+  //current object/products  add 1 to the views attribute
   OddDuck.allOddDuckArray[oddProduct1].views++;
   OddDuck.allOddDuckArray[oddProduct2].views++;
   OddDuck.allOddDuckArray[oddProduct3].views++;
 }
 
-function handleoddProductClick(event) {
-  console.log('proof of life!', event);
+function handleOddProductClick(event) {
+//   console.log('proof of life!', event);
   if (event.target === imageContainer) {
     alert('Please click on an image!');
   }
@@ -115,4 +115,4 @@ new OddDuck('Cat', 'images/kittycat.jpg');
 
 
 renderOddDuck();
-imageContainer.addEventListener('click', handleoddProductClick);
+imageContainer.addEventListener('click', handleOddProductClick);
