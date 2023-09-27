@@ -1,113 +1,145 @@
 'use strict';
-
 console.log('app.js is running!');
 
 let imageContainer = document.querySelector('section');
-let resultButton = document.querySelector('section + div');
+let resultButton = document.getElementById('view-results');
+
 let image1 = document.getElementById('imageOne');
 let image2 = document.getElementById('imageTwo');
 let image3 = document.getElementById('imageThree');
-
+// console.log(image1, image2, image3);
 let clicks = 0;
 let maxAttemptsAllowed = 10;
-Animals.allAnimalsArray = [];
+OddDuck.allOddDuckArray = [];
 
-function Animals(name, src) {
+function OddDuck(name, src) {
   this.name = name;
   this.src = src;
   this.views = 0;
   this.click = 0;
 
-  Animals.allAnimalsArray.push(this);
+  OddDuck.allOddDuckArray.push(this);
 }
+// console.log(OddDuck.allOddDuckArray);
 
 function getRandomNumber() {
-  return Math.floor(Math.random() * Animals.allAnimalsArray.length);
+  return Math.floor(Math.random() * OddDuck.allOddDuckArray.length);
 }
 
-function renderAnimals() {
-  let animal1, animal2, animal3;
+function renderOddDuck() {
+  //undefined say these exist... just doesnt know what it is yet...
+  let oddProduct1, oddProduct2, oddProduct3;
 
   do {
-    animal1 = getRandomNumber();
-    animal2 = getRandomNumber();
-    animal3 = getRandomNumber();
-  } while (animal1 === animal2 || animal1 === animal3 || animal2 === animal3);
+    oddProduct1 = getRandomNumber();
+    oddProduct2 = getRandomNumber();
+    oddProduct3 = getRandomNumber();
+  } while (oddProduct1 === oddProduct2 || oddProduct1 === oddProduct3 || oddProduct2 === oddProduct3);
+  //   console.log(oddProduct1, oddProduct2, oddProduct3);
+  //             const. array[number - getRandomNumber();].property
+  //   console.log(OddDuck.allOddDuckArray[oddProduct1].src);
+  image1.src = OddDuck.allOddDuckArray[oddProduct1].src;
+  image2.src = OddDuck.allOddDuckArray[oddProduct2].src;
+  image3.src = OddDuck.allOddDuckArray[oddProduct3].src;
 
-  image1.src = Animals.allAnimalsArray[animal1].src;
-  image2.src = Animals.allAnimalsArray[animal2].src;
-  image3.src = Animals.allAnimalsArray[animal3].src;
-
-  image1.alt = Animals.allAnimalsArray[animal1].name;
-  image2.alt = Animals.allAnimalsArray[animal2].name;
-  image3.alt = Animals.allAnimalsArray[animal3].name;
-
-  Animals.allAnimalsArray[animal1].views++;
-  Animals.allAnimalsArray[animal2].views++;
-  Animals.allAnimalsArray[animal3].views++;
+  image1.alt = OddDuck.allOddDuckArray[oddProduct1].name;
+  image2.alt = OddDuck.allOddDuckArray[oddProduct2].name;
+  image3.alt = OddDuck.allOddDuckArray[oddProduct3].name;
+  //current object/products  add 1 to the views attribute
+  OddDuck.allOddDuckArray[oddProduct1].views++;
+  OddDuck.allOddDuckArray[oddProduct2].views++;
+  OddDuck.allOddDuckArray[oddProduct3].views++;
 }
 
-function handleAnimalClick(event) {
-  console.log('proof of life!', event);
+function handleOddProductClick(event) {
+  //   console.log('proof of life!', event);
   if (event.target === imageContainer) {
     alert('Please click on an image!');
   }
 
   clicks++;
 
-  let clickAnimal = event.target.alt;
-  console.log('animal name', clickAnimal);
-  for (let i = 0; i < Animals.allAnimalsArray.length; i++) {
-    if (clickAnimal === Animals.allAnimalsArray[i].name) {
-      Animals.allAnimalsArray[i].click++;
+  let clickoddProduct = event.target.alt;
+  //   console.log('oddProduct name', clickoddProduct);
+  for (let i = 0; i < OddDuck.allOddDuckArray.length; i++) {
+    if (clickoddProduct === OddDuck.allOddDuckArray[i].name) {
+      OddDuck.allOddDuckArray[i].click++;
       break;
     }
   }
 
   if (clicks === maxAttemptsAllowed) {
-    imageContainer.removeEventListener('click', handleAnimalClick);
+    imageContainer.removeEventListener('click', handleOddProductClick);
     resultButton.addEventListener('click', renderResults);
     imageContainer.className = 'no-voting';
   } else {
-    renderAnimals();
+    renderOddDuck();
   }
 }
 
 function renderResults() {
   console.log('proof of life in the render results');
   let ul = document.querySelector('ul');
-
-  for (let i = 0; i < Animals.allAnimalsArray.length; i++) {
+  console.log(ul);
+  for (let i = 0; i < OddDuck.allOddDuckArray.length; i++) {
     let li = document.createElement('li');
-    li.textContent = `${Animals.allAnimalsArray[i].name} had ${Animals.allAnimalsArray[i].views} views and was clicked on ${Animals.allAnimalsArray[i].click} times`;
+    li.textContent = `${OddDuck.allOddDuckArray[i].name} had ${OddDuck.allOddDuckArray[i].views} views and was clicked on ${OddDuck.allOddDuckArray[i].click} times`;
     ul.appendChild(li);
   }
+  runOddDuckDChart();
 }
 
-new Animals('R2D2 bag', 'images/bag.jpg');
-new Animals('Thats Bannanas', 'images/banana.jpg');
-new Animals('iBathroom', 'images/bathroom.jpg');
-new Animals('BoostyBussin', 'images/boots.jpg');
-new Animals('BreakFast Box', 'images/breakfast.jpg');
-new Animals('Nope', 'images/bubblegum.jpg');
-new Animals('EagerChairin', 'images/chair.jpg');
-new Animals('They\'re Here', 'images/cthulhu.jpg');
-new Animals('Plata-Doggie', 'images/dog-duck.jpg');
-new Animals('Dragon4Dinner', 'images/dragon.jpg');
-new Animals('Pen Plate', 'images/pen.jpg');
-new Animals('PetSweep', 'images/pet-sweep.jpg');
-new Animals('Pizscissors-A', 'images/scissors.jpg');
-new Animals('SharkSleep', 'images/shark.jpg');
-new Animals('Baby Clean', 'images/sweep.jpg');
-new Animals('Hoth Cloth', 'images/tauntaun.jpg');
-new Animals('Uni-Spam', 'images/unicorn.jpg');
-new Animals('Tail TeraByte', 'images/usb.jpg');
-new Animals('Water Me', 'images/water-can.jpg');
-new Animals('wine-glass', 'images/wine-glass.jpg');
-new Animals('Bunny', 'images/bunny.jpg');
-new Animals('Dog', 'images/doggggggo.jpg');
-new Animals('Cat', 'images/kittycat.jpg');
+new OddDuck('R2D2 bag', 'images/bag.jpg');
+new OddDuck('Thats Bannanas', 'images/banana.jpg');
+new OddDuck('iBathroom', 'images/bathroom.jpg');
+new OddDuck('BoostyBussin', 'images/boots.jpg');
+new OddDuck('BreakFast Box', 'images/breakfast.jpg');
+new OddDuck('Nope', 'images/bubblegum.jpg');
+new OddDuck('EagerChairin', 'images/chair.jpg');
+new OddDuck('They\'re Here', 'images/cthulhu.jpg');
+new OddDuck('Plata-Doggie', 'images/dog-duck.jpg');
+new OddDuck('Dragon4Dinner', 'images/dragon.jpg');
+new OddDuck('Pen Plate', 'images/pen.jpg');
+new OddDuck('PetSweep', 'images/pet-sweep.jpg');
+new OddDuck('Pizscissors-A', 'images/scissors.jpg');
+new OddDuck('SharkSleep', 'images/shark.jpg');
+new OddDuck('Baby Clean', 'images/sweep.png');
+new OddDuck('Hoth Cloth', 'images/tauntaun.jpg');
+new OddDuck('Uni-Spam', 'images/unicorn.jpg');
+// new OddDuck('Tail TeraByte', 'images/usb.jpg');
+new OddDuck('Water Me', 'images/water-can.jpg');
+new OddDuck('wine-glass', 'images/wine-glass.jpg');
+new OddDuck('Bunny', 'images/bunny.jpg');
+new OddDuck('Dog', 'images/doggggggo.jpg');
+new OddDuck('Cat', 'images/kittycat.jpg');
 
 
-renderAnimals();
-imageContainer.addEventListener('click', handleAnimalClick);
+renderOddDuck();
+imageContainer.addEventListener('click', handleOddProductClick);
+
+
+function runOddDuckDChart() {
+  //update the labels
+  //update the datasets
+  // loop over our OddDuck Array
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
